@@ -15,25 +15,19 @@ class BFParser:
         self.p = EightBit(0)
         self.addy = [0] * 29999
 
-    def bracketCheck(self) -> dict:
+    def bracketCheck(self) -> bool:
         count = 0
-        brackets = {}
-        stack = []
-        for i, e in enumerate(self.code):
-            if e == "[":
+        for i in self.code:
+            if i == "[":
                 count += 1
-                stack.append(i)
-            elif e == "]":
+            elif i == "]":
                 count -= 1
                 if count < 0:
-                    return {}
-
-                brackets[stack.pop()] = i
-
-        return brackets
+                    return False
+        return count == 0
 
     def execute(self):
-        if not (brackets := self.bracketCheck()):
+        if not self.bracketCheck():
             raise SyntaxError("Bracket")
 
         offset = 0
