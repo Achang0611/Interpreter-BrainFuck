@@ -12,8 +12,8 @@ class EightBit(int):
 class BFParser:
     def __init__(self, code: str) -> None:
         self.code = code
-        self.p = EightBit(0)
-        self.addy = [0] * 29999
+        self.p = 0
+        self.addy = [EightBit(0)] * 30000
 
     def bracketCheck(self) -> bool:
         count = 0
